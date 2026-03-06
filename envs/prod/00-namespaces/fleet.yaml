@@ -1,0 +1,5 @@
+name: namespaces
+labels:
+  tier: bootstrap
+kustomize:
+  dir: overlays/current

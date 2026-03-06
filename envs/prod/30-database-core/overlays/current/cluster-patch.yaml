@@ -1,0 +1,13 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg-main
+  namespace: database
+spec:
+  instances: 3
+  storage:
+    storageClass: longhorn-ha
+    size: 50Gi
+  walStorage:
+    storageClass: longhorn-ha
+    size: 20Gi

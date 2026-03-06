@@ -1,0 +1,10 @@
+name: minio-bootstrap
+defaultNamespace: minio
+labels:
+  app: minio-bootstrap
+dependsOn:
+- selector:
+    matchLabels:
+      app: minio
+kustomize:
+  dir: overlays/current

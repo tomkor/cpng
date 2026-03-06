@@ -1,0 +1,53 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: minio-bootstrap-cnpg
+  namespace: minio
+spec:
+  backoffLimit: 3
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: mc
+          image: quay.io/minio/mc:latest
+          env:
+            - name: MINIO_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: minio-root-credentials
+                  key: root-user
+            - name: MINIO_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: minio-root-credentials
+                  key: root-password
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              until mc alias set local http://minio.minio.svc.cluster.local:9000 "$MINIO_ROOT_USER" "$MINIO_ROOT_PASSWORD"; do
+                sleep 5
+              done
+              mc mb --ignore-existing local/postgres-backups
+              cat >/tmp/cnpg-policy.json <<'POLICY'
+              {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": ["s3:ListBucket","s3:GetBucketLocation"],
+                    "Resource": ["arn:aws:s3:::postgres-backups"]
+                  },
+                  {
+                    "Effect": "Allow",
+                    "Action": ["s3:PutObject","s3:GetObject","s3:DeleteObject","s3:AbortMultipartUpload","s3:ListMultipartUploadParts"],
+                    "Resource": ["arn:aws:s3:::postgres-backups/*"]
+                  }
+                ]
+              }
+              POLICY
+              mc admin policy create local cnpg-backup-policy /tmp/cnpg-policy.json || true
+              mc admin user add local cnpg-backup CHANGE_ME_BACKUP_PASSWORD || true
+              mc admin policy attach local cnpg-backup-policy --user cnpg-backup

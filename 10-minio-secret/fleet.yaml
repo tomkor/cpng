@@ -1,4 +1,0 @@
-name: minio-secret
-defaultNamespace: minio
-labels:
-  app: minio-secret

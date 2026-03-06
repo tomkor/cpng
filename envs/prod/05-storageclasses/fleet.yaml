@@ -1,9 +1,0 @@
-name: storageclasses
-labels:
-  app: storageclasses
-dependsOn:
-  - selector:
-      matchLabels:
-        tier: bootstrap
-kustomize:
-  dir: .

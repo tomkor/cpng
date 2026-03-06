@@ -1,4 +1,0 @@
-persistence:
-  enabled: true
-  storageClass: longhorn-ha
-  size: 100Gi

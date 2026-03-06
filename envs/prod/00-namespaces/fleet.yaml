@@ -1,5 +1,0 @@
-name: namespaces
-labels:
-  tier: bootstrap
-kustomize:
-  dir: .

@@ -1,7 +1,0 @@
-name: cnpg-operator
-labels:
-  app: cnpg-operator
-dependsOn:
-  - selector:
-      matchLabels:
-        tier: bootstrap

@@ -1,0 +1,10 @@
+name: restore-test
+defaultNamespace: database
+labels:
+  app: restore-test
+dependsOn:
+- selector:
+    matchLabels:
+      app: postgres
+kustomize:
+  dir: overlays/current

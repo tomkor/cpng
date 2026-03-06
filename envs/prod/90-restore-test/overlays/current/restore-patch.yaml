@@ -1,0 +1,12 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg-main-restore-test
+  namespace: database
+spec:
+  storage:
+    storageClass: longhorn-ha
+    size: 50Gi
+  walStorage:
+    storageClass: longhorn-ha
+    size: 20Gi

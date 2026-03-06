@@ -1,0 +1,19 @@
+mode: standalone
+
+auth:
+  existingSecret: minio-root-credentials
+  rootUserSecretKey: root-user
+  rootPasswordSecretKey: root-password
+
+defaultBuckets: "postgres-backups"
+
+service:
+  type: ClusterIP
+  ports:
+    api: 9000
+
+console:
+  enabled: false
+
+ingress:
+  enabled: false

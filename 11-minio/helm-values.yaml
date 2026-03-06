@@ -9,7 +9,7 @@ defaultBuckets: "postgres-backups"
 
 persistence:
   enabled: true
-  storageClass: longhorn
+  storageClass: longhorn-single
   size: 10Gi
 
 service:

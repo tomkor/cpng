@@ -1,0 +1,13 @@
+name: minio
+defaultNamespace: minio
+labels:
+  app: minio
+dependsOn:
+  - selector:
+      matchLabels:
+        tier: bootstrap
+helm:
+  chart: oci://registry-1.docker.io/bitnamicharts/minio
+  version: 17.0.19
+  valuesFiles:
+    - helm-values.yaml

@@ -1,0 +1,10 @@
+name: minio-secret
+defaultNamespace: minio
+labels:
+  app: minio-secret
+dependsOn:
+  - selector:
+      matchLabels:
+        app: storageclasses
+kustomize:
+  dir: .

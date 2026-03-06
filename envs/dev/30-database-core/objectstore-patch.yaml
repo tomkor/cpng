@@ -1,0 +1,8 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: minio-store
+  namespace: database
+spec:
+  configuration:
+    retentionPolicy: "7d"

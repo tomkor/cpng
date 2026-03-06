@@ -1,0 +1,13 @@
+name: database-core
+defaultNamespace: database
+labels:
+  app: postgres
+dependsOn:
+  - selector:
+      matchLabels:
+        app: minio-bootstrap
+  - selector:
+      matchLabels:
+        app: cnpg-operator
+kustomize:
+  dir: .

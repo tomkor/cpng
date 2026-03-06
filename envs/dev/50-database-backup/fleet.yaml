@@ -1,0 +1,10 @@
+name: database-backup
+defaultNamespace: database
+labels:
+  app: database-backup
+dependsOn:
+  - selector:
+      matchLabels:
+        app: postgres
+kustomize:
+  dir: .

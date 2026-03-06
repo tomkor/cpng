@@ -5,9 +5,9 @@ labels:
 dependsOn:
   - selector:
       matchLabels:
-        tier: bootstrap
+        app: minio-secret
 helm:
   chart: oci://registry-1.docker.io/bitnamicharts/minio
-  version: 17.0.19
+  version: 17.0.21
   valuesFiles:
     - helm-values.yaml

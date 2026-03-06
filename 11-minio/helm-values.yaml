@@ -10,7 +10,7 @@ defaultBuckets: "postgres-backups"
 persistence:
   enabled: true
   storageClass: longhorn
-  size: 10Gi
+  size: 100Gi
 
 service:
   type: ClusterIP
@@ -18,13 +18,7 @@ service:
     api: 9000
 
 console:
-  service:
-    type: ClusterIP
-    ports:
-      console: 9001
-
-ingress:
   enabled: false
 
-consoleIngress:
+ingress:
   enabled: false
